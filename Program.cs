@@ -9,11 +9,8 @@ builder.Services.AddSwaggerGen();
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<GuapApiService>();
-builder.Services.AddSingleton<ConnectionMultiplexer>(provider =>
-{
-    var connection = ConnectionMultiplexer.Connect("localhost:6379");
-    return connection;
-});
+builder.Services.AddScoped<IConnectionMultiplexer>(sp =>
+    ConnectionMultiplexer.Connect("localhost:6379"));
 
 
 var app = builder.Build();
