@@ -11,8 +11,8 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<GuapApiService>();
 builder.Services.AddSingleton<ConnectionMultiplexer>(provider =>
 {
-    var redisConnectionString = "localhost:6379";
-    return ConnectionMultiplexer.Connect(redisConnectionString);
+    var connection = ConnectionMultiplexer.Connect("localhost:6379");
+    return connection;
 });
 
 
