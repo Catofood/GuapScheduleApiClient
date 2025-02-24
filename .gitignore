@@ -214,3 +214,5 @@ src/Telegram.Bot.Documentation/
 
 # Rider IDE
 .idea
+.idea/
+*.iml
