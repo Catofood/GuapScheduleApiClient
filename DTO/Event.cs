@@ -5,8 +5,8 @@ namespace Test.DTO;
 public class Event
 {
     [JsonPropertyName("eventName")] public string EventName;
-    [JsonPropertyName("eventDateStart")] public long EventDateStart;
-    [JsonPropertyName("eventDateEnd")] public long EventDateEnd;
+    [JsonPropertyName("eventDateStart")] public long? EventDateStart;
+    [JsonPropertyName("eventDateEnd")] public long? EventDateEnd;
     [JsonPropertyName("roomIds")] public List<int> RoomIds;
     [JsonPropertyName("teacherIds")] public List<int> TeacherIds;
     [JsonPropertyName("departmentId")] public int DepartmentId;

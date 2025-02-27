@@ -1,6 +1,8 @@
-using System.Text.Json;
 using StackExchange.Redis;
 using Test.DTO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using InvalidOperationException = System.InvalidOperationException;
 using Version = Test.DTO.Version;
 
 namespace Test;
@@ -17,7 +19,7 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
         }
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var data = JsonSerializer.Deserialize<T>(jsonResponse);
+        var data = JsonConvert.DeserializeObject<T>(jsonResponse);
 
         return data;
     }
@@ -26,8 +28,8 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
     // TODO: Сделать вывод данных из redis
     public async Task DonwloadAllStudiesToRedisAsync()
     {
-        using var json = await GetDataAsync<JsonDocument>(AllStudyEvents.StudyEvents);
-        string textJson = json.RootElement.GetRawText();
+        var json = await GetDataAsync<JObject>(AllStudyEvents.StudyEvents);
+        string textJson = json.ToString();
         await RedisSetAllStudiesAsync(textJson);
     }
 
@@ -51,25 +53,9 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
     
     public async Task<Dictionary<int, WeeklySchedule>> ParseAllStudiesAsync()
     {
-        using var doc = JsonDocument.Parse(await RedisGetAllStudiesAsync());
-        JsonElement schedulesJson = doc.RootElement.GetProperty("groups");
-        var schedules = schedulesJson.Deserialize<Dictionary<int, JsonElement>>();
-        var groupNumberToSchedule = new Dictionary<int, WeeklySchedule>();
-        foreach (var key in schedules.Keys)
-        {
-            // Нужно взять по ключу список ивентов на день недели
-            var test = schedules[key].GetProperty("monday").Deserialize<List<JsonElement>>();
-            Console.WriteLine(test);
-            var monday = new List<Event>();
-            var tuesday = new List<Event>();
-            var wednesday = new List<Event>();
-            var thursday = new List<Event>();
-            var friday = new List<Event>();
-            var saturday = new List<Event>();
-            var other = new List<Event>();
-
-        }
-        return groupNumberToSchedule ?? throw new InvalidOperationException();
+        var doc = JObject.Parse(await RedisGetAllStudiesAsync());
+        var schedules = JsonConvert.DeserializeObject<Dictionary<int, WeeklySchedule>>(doc["groups"].ToString());
+        return schedules ?? throw new InvalidOperationException("");
     }
     
     // Пример:
