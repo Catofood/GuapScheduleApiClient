@@ -1,45 +1,69 @@
-namespace Test.DTO;
+namespace Test.Static.DTO;
 
 using Newtonsoft.Json;
 
-public record CalendarEvent
+public class CalendarEvent
 {
+    // events - groups
     [JsonProperty("groupId")]
-    public int GroupId { get; init; }
+    public int GroupId;
 
+    // events - groups
     [JsonProperty("groupName")]
-    public string Group { get; init; }
+    public string Group;
 
+    // events - rooms
     [JsonProperty("room")]
-    public string Room { get; init; }
+    public string Room;
 
+    // events - rooms - buildings
     [JsonProperty("building")]
-    public string Building { get; init; }
+    public string Building;
 
+    // events
     [JsonProperty("eventType")]
-    public string EventType { get; init; }
+    public string EventType;
 
+    // events
     [JsonProperty("eventName")]
-    public string EventName { get; init; }
+    public string EventName;
 
+    // events
     [JsonProperty("eventTimeStart")]
-    public DateTime EventTimeStart { get; init; }
+    public DateTime EventTimeStart;
 
+    // events
     [JsonProperty("eventTimeEnd")]
-    public DateTime EventTimeEnd { get; init; }
+    public DateTime EventTimeEnd;
 
+    // events - teachers
     [JsonProperty("teacherName")]
-    public string TeacherName { get; init; }
+    public string TeacherName;
 
+    // events - teachers
     [JsonProperty("teacherPost")]
-    public string TeacherPost { get; init; }
+    public string TeacherPost;
 
+    // events - teachers
     [JsonProperty("teacherDegree")]
-    public string TeacherDegree { get; init; }
+    public string TeacherDegree;
 
+    // events - teachers
     [JsonProperty("teacherAcademicTitle")]
-    public string TeacherAcademicTitle { get; init; }
+    public string TeacherAcademicTitle;
+    
+    // events - departments
+    [JsonProperty("department")]
+    public string Department;
 }
+
+// Что нужно (Запросы):
+// Rooms
+// Buildings
+// Teachers
+// Departments
+// Groups
+// Events
 
 // В редис ключ будет такой:
 // calendarEventsByGroup:{groupId}

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Test.DTO;
+namespace Test.Static.DTO;
 
 public class Event
 {
@@ -32,6 +32,7 @@ public class Event
 //       "eventType": lesson_type_full,       // Тип занятия (например, "Лекция")
 //       "roomIds": [room_id, ...],       // Список идентификаторов аудиторий
 //       "teacherIds": [teacher_id, ...], // Список идентификаторов преподавателей
+//       "departmentId": department_id, (при наличии)
 //     },
 //     ...
 //   ]

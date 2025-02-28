@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Test;
+namespace Test.Static;
 
 // Предназначение класса: Возвращать эндпоинты расписания гуап
 public static class Endpoints
@@ -8,7 +8,7 @@ public static class Endpoints
     // TODO: Добавить автоматическую проверку перед
     // запуском проекта на наличие этих данных.
     // (Сделать get запросы)
-    public static string GetGuapRaspApiUrl = "https://test-rasp.guap.ru:8080";
+    public const string GetGuapRaspApiUrl = "https://test-rasp.guap.ru:8080";
     
     public static string Version
     {

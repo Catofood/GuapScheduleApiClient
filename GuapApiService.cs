@@ -1,11 +1,13 @@
 using StackExchange.Redis;
-using Test.DTO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Test.Static.DTO;
 using InvalidOperationException = System.InvalidOperationException;
-using Version = Test.DTO.Version;
+using Version = Test.Static.DTO.Version;
 
-namespace Test;
+namespace Test.Static;
+
+using Version = DTO.Version;
 
 public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory)
 {
@@ -23,45 +25,54 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
 
         return data;
     }
-
-    // TODO: Делаем все нужные запросы на API гуап чтобы получить id групп, зданий, преподавателей и т.п.
-    // TODO: Сразу парсим эти данные при получении и храним уже в своём формате в redis, с разделением на группы
-    // Что нужно (Запросы):
-    // Rooms
-    // Buildings
-    // Teachers
-    // Departments
-    //
-    public async Task DonwloadAllStudiesToRedisAsync()
+    public async Task<string> GetTeachers()
     {
-        var json = await GetDataAsync<JObject>(Endpoints.StudyEvents);
-        string textJson = json.ToString();
-        await RedisSetAllStudiesAsync(textJson);
+        return await GetDataAsync<string>(Endpoints.Teachers);
+    }
+
+    public async Task<string> GetExamEvents()
+    {
+        return await GetDataAsync<string>(Endpoints.ExamEvents);
     }
     
+    public async Task<string> GetStudyEvents()
+    {
+        return await GetDataAsync<string>(Endpoints.StudyEvents);
+    }
+
+    public async Task<string> GetGroups()
+    {
+        return await GetDataAsync<string>(Endpoints.Groups);
+    }
+
+    public async Task<string> GetDepartments()
+    {
+        return await GetDataAsync<string>(Endpoints.Departments);
+    }
+
+    public async Task<string> GetBuildings()
+    {
+        return await GetDataAsync<string>(Endpoints.Buildings);
+    }
     
+    public async Task<string> GetRooms()
+    {
+        return await GetDataAsync<string>(Endpoints.Rooms);
+    }
     
-    // Пример:
-    // {
-    //     "groups": {
-    //         "1": {
-    //             "monday": [
-    //             {
-    //                 "eventName": "Бюджетный учет и отчетность",
-    //                 "eventDateStart": 1739812200,
-    //                 "eventDateEnd": 1739817600,
-    //                 "roomIds": [
-    //                 3
-    //                     ],
-    //                 "teacherIds": [
-    //                 798
-    //                     ],
-    //                 "departmentId": 3,
-    //                 "eventType": "Лекция"
-    //             },
-    //         }
-    //      }
-    // }
+    public async Task<string> GetVersion()
+    {
+        return await GetDataAsync<string>(Endpoints.Version);
+    }
+    
+    // TODO: Сразу парсим эти данные при получении и храним уже в своём формате в redis, с разделением на группы
+    // TODO: Сохраняем изначальную нормализацию, т.к. данных много.
+    // TODO: В новой структуре убрать дни недели и рассчитывать их по UNIX времени
+    public async Task DownloadAllStudiesToRedisAsync()
+    {
+        var json = await GetDataAsync<string>(Endpoints.StudyEvents);
+        await RedisSetAllStudiesAsync(json);
+    }
 
     public async Task RedisSetAllStudiesAsync(string jsonText)
     {

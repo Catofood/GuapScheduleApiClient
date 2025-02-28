@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Test.DTO;
+namespace Test.Static.DTO;
 
 public class Group()
 {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
 
-namespace Test.Controllers;
+namespace Test.Static.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -18,6 +18,7 @@ public class Controller : ControllerBase
         _scopeFactory = scopeFactory;
     }
 
+    // TODO: Позднее удалить
     [HttpPost("Post")]
     public void Test1([FromQuery] string key, [FromQuery] string value)
     {
@@ -46,7 +47,6 @@ public class Controller : ControllerBase
     [HttpPost("ParseFromRedis")]
     public async Task<IActionResult> Test3()
     {
-        using var scope = _scopeFactory.CreateScope();
         await _guapApiService.ParseAllStudiesAsync();
         return Ok();
     }
@@ -54,14 +54,15 @@ public class Controller : ControllerBase
     [HttpPost("DownloadToRedis")]
     public async Task<IActionResult> Test4()
     {
-        await _guapApiService.DonwloadAllStudiesToRedisAsync();
+        await _guapApiService.DownloadAllStudiesToRedisAsync();
         return Ok();
     }
     
     [HttpGet("GetRedis")]
     public async Task<IActionResult> Test5()
     {
-        return Ok(await _guapApiService.RedisGetAllStudiesAsync());
+        await _guapApiService.RedisGetAllStudiesAsync();
+        return Ok();
     }
 
     [HttpPost("PostRedis")]

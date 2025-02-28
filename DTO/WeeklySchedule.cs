@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Test.DTO;
+namespace Test.Static.DTO;
 
 public class WeeklySchedule
 {
@@ -26,6 +26,7 @@ public class WeeklySchedule
 //         "eventType": lesson_type_full,
 //         "teacherIds": [teacher_id,...],
 //         "groupIds": [group_id,...],
+//         "departmentId": department_id, (при наличии)
 //     },
 //     ...
 //         ]
