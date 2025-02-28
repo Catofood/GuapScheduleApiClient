@@ -1,16 +1,16 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Test.DTO;
 
 public class Event
 {
-    [JsonPropertyName("eventName")] public string EventName;
-    [JsonPropertyName("eventDateStart")] public long? EventDateStart;
-    [JsonPropertyName("eventDateEnd")] public long? EventDateEnd;
-    [JsonPropertyName("roomIds")] public List<int> RoomIds;
-    [JsonPropertyName("teacherIds")] public List<int> TeacherIds;
-    [JsonPropertyName("departmentId")] public int DepartmentId;
-    [JsonPropertyName("eventType")] public string EventType;
+    [JsonProperty("eventName")] public string EventName;
+    [JsonProperty("eventDateStart")] public long? EventDateStart;
+    [JsonProperty("eventDateEnd")] public long? EventDateEnd;
+    [JsonProperty("roomIds")] public List<int> RoomIds;
+    [JsonProperty("teacherIds")] public List<int> TeacherIds;
+    [JsonProperty("departmentId")] public int DepartmentId;
+    [JsonProperty("eventType")] public string EventType;
 }
 
 

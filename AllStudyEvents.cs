@@ -3,7 +3,7 @@ using System.Text;
 namespace Test;
 
 // Предназначение класса: Возвращать эндпоинты расписания гуап
-public static class AllStudyEvents
+public static class Endpoints
 {
     // TODO: Добавить автоматическую проверку перед
     // запуском проекта на наличие этих данных.

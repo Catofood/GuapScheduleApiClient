@@ -1,16 +1,16 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Test.DTO;
 
 public class WeeklySchedule
 {
-    [JsonPropertyName("monday")] public List<Event> Monday;
-    [JsonPropertyName("tuesday")] public List<Event> Tuesday;
-    [JsonPropertyName("wednesday")] public List<Event> Wednesday;
-    [JsonPropertyName("thursday")] public List<Event> Thursday;
-    [JsonPropertyName("friday")] public List<Event> Friday;
-    [JsonPropertyName("saturday")] public List<Event> Saturday;
-    [JsonPropertyName("other")] public List<Event> Other;
+    [JsonProperty("monday")] public List<Event> Monday;
+    [JsonProperty("tuesday")] public List<Event> Tuesday;
+    [JsonProperty("wednesday")] public List<Event> Wednesday;
+    [JsonProperty("thursday")] public List<Event> Thursday;
+    [JsonProperty("friday")] public List<Event> Friday;
+    [JsonProperty("saturday")] public List<Event> Saturday;
+    [JsonProperty("other")] public List<Event> Other;
 }
 
 

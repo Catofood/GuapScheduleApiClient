@@ -24,14 +24,44 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
         return data;
     }
 
-    // TODO: Сразу парсим данные при получении и храним уже в своём формате в redis
-    // TODO: Сделать вывод данных из redis
+    // TODO: Делаем все нужные запросы на API гуап чтобы получить id групп, зданий, преподавателей и т.п.
+    // TODO: Сразу парсим эти данные при получении и храним уже в своём формате в redis, с разделением на группы
+    // Что нужно (Запросы):
+    // Rooms
+    // Buildings
+    // Teachers
+    // Departments
+    //
     public async Task DonwloadAllStudiesToRedisAsync()
     {
-        var json = await GetDataAsync<JObject>(AllStudyEvents.StudyEvents);
+        var json = await GetDataAsync<JObject>(Endpoints.StudyEvents);
         string textJson = json.ToString();
         await RedisSetAllStudiesAsync(textJson);
     }
+    
+    
+    
+    // Пример:
+    // {
+    //     "groups": {
+    //         "1": {
+    //             "monday": [
+    //             {
+    //                 "eventName": "Бюджетный учет и отчетность",
+    //                 "eventDateStart": 1739812200,
+    //                 "eventDateEnd": 1739817600,
+    //                 "roomIds": [
+    //                 3
+    //                     ],
+    //                 "teacherIds": [
+    //                 798
+    //                     ],
+    //                 "departmentId": 3,
+    //                 "eventType": "Лекция"
+    //             },
+    //         }
+    //      }
+    // }
 
     public async Task RedisSetAllStudiesAsync(string jsonText)
     {
@@ -55,33 +85,15 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
     {
         var doc = JObject.Parse(await RedisGetAllStudiesAsync());
         var schedules = JsonConvert.DeserializeObject<Dictionary<int, WeeklySchedule>>(doc["groups"].ToString());
-        return schedules ?? throw new InvalidOperationException("");
+        return schedules ?? throw new NullReferenceException();
     }
     
-    // Пример:
-    // {
-    //     "groups": {
-    //         "1": {
-    //             "monday": [
-    //             {
-    //                 "eventName": "Бюджетный учет и отчетность",
-    //                 "eventDateStart": 1739812200,
-    //                 "eventDateEnd": 1739817600,
-    //                 "roomIds": [
-    //                 3
-    //                     ],
-    //                 "teacherIds": [
-    //                 798
-    //                     ],
-    //                 "departmentId": 3,
-    //                 "eventType": "Лекция"
-    //             },
-    //         }
-    //      }
-    // }
+    
+    
+
     
     public async Task<Version> GetVersionAsync()
     {
-        return await GetDataAsync<Version>(AllStudyEvents.Version);
+        return await GetDataAsync<Version>(Endpoints.Version);
     }
 }

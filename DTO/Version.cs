@@ -1,24 +1,23 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Test.DTO;
 
 public class Version
 {
-    [JsonPropertyName("versionID")] public int VersionId;
+    [JsonProperty("versionID")] public int VersionId;
 
-    [JsonPropertyName("version_main")] public int VersionMain;
+    [JsonProperty("version_main")] public int VersionMain;
 
-    [JsonPropertyName("version_session")] public int VersionSession;
+    [JsonProperty("version_session")] public int VersionSession;
 
-    [JsonPropertyName("version_zaoch")] public int VersionZaoch;
+    [JsonProperty("version_zaoch")] public int VersionZaoch;
 
-    [JsonPropertyName("version_spo")] public int VersionSpo;
+    [JsonProperty("version_spo")] public int VersionSpo;
 
-    [JsonPropertyName("datetime")] public long DateTime;
+    [JsonProperty("datetime")] public long DateTime;
 
-    [JsonPropertyName("term")] public int Term;
+    [JsonProperty("term")] public int Term;
 }
-
 
 // [GET]
 // /get-version - получить данные о текущей версии расписания
