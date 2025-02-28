@@ -1,13 +1,14 @@
+using Application.DTO;
 using StackExchange.Redis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Test.Static.DTO;
+using DTO_Version = Application.DTO.Version;
 using InvalidOperationException = System.InvalidOperationException;
-using Version = Test.Static.DTO.Version;
+using Version = Application.DTO.Version;
 
-namespace Test.Static;
+namespace Application.Static;
 
-using Version = DTO.Version;
+using Version = DTO_Version;
 
 public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory)
 {

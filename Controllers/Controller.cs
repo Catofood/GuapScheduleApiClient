@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
 
-namespace Test.Static.Controllers;
+namespace Application.Static.Controllers;
 
 [ApiController]
 [Route("[controller]")]

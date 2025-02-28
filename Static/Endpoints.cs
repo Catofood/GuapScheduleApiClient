@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Test.Static;
+namespace Application.Static;
 
 // Предназначение класса: Возвращать эндпоинты расписания гуап
 public static class Endpoints

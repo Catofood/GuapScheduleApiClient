@@ -1,13 +1,9 @@
-namespace Test.Static.DTO;
-
 using Newtonsoft.Json;
 
-public class CalendarEvent
-{
-    // events - groups
-    [JsonProperty("groupId")]
-    public int GroupId;
+namespace Application.Models;
 
+public class CalendarEvent
+{ 
     // events - groups
     [JsonProperty("groupName")]
     public string Group;

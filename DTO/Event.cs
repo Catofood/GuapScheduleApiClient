@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Test.Static.DTO;
+namespace Application.DTO;
 
 public class Event
 {

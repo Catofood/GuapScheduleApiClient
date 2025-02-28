@@ -1,4 +1,4 @@
-namespace Test.Static;
+namespace Application.Static;
 
 public class RedisService
 {

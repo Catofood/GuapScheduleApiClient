@@ -1,6 +1,6 @@
-namespace Test.Static.DTO;
-
 using Newtonsoft.Json;
+
+namespace Application.DTO;
 
 public class Department
 {

@@ -1,4 +1,4 @@
-using Test.Static;
+using Application.Static;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
