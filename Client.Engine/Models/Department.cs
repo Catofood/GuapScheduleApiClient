@@ -4,12 +4,10 @@ namespace Application.DTO;
 
 public class Department
 {
-    [JsonProperty("ItemId")] 
-    public int ItemId;
-
-    [JsonProperty("Name")] 
-    public string Name;
+    [JsonProperty("ItemId")] public int ItemId;
+    [JsonProperty("Name")] public string Name;
 }
+
 
 // /get-sem-depts - получить список кафедр
 // Формат данных:

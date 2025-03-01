@@ -4,20 +4,15 @@ namespace Application.DTO;
 
 public class Teacher
 {
-    [JsonProperty("ItemId")] 
-    public int ItemId;
+    [JsonProperty("ItemId")] public int ItemId;
 
-    [JsonProperty("Name")] 
-    public string Name;
+    [JsonProperty("Name")] public string Name;
 
-    [JsonProperty("Post")] 
-    public string Post;
+    [JsonProperty("Post")] public string Post;
 
-    [JsonProperty("Degree")] 
-    public string Degree;
+    [JsonProperty("Degree")] public string Degree;
 
-    [JsonProperty("AcademicTitle")] 
-    public string AcademicTitle;
+    [JsonProperty("AcademicTitle")] public string AcademicTitle;
 }
 
 // /get-sem-teachers - получить список преподавателей

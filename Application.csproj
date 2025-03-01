@@ -15,4 +15,25 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Cache.Engine\Class1.cs">
+        <Link>Chache.Engine\Class1.cs</Link>
+      </Compile>
+      <Compile Update="Cache.Contracts\Class1.cs">
+        <Link>Chache.Contracts\Class1.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Cache\Entities\" />
+      <Folder Include="SuaiScheduleClient\Models\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="Cache.Contracts\Cache.Contracts.csproj" />
+      <ProjectReference Include="Cache.Engine\Cache.Engine.csproj" />
+      <ProjectReference Include="Client.Contracts\Client.Contracts.csproj" />
+      <ProjectReference Include="Client.Engine\Client.Engine.csproj" />
+    </ItemGroup>
+
 </Project>

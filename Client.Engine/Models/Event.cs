@@ -13,7 +13,6 @@ public class Event
     [JsonProperty("eventType")] public string EventType;
 }
 
-
 // /get-sem-group-events?term=<term_num>&id=<group_id>&startdate=&enddate= - получить список пар (очки и вечерки) для группы с ИД group_id
 // Аргументы:
 //   term - номер семестра (1 - осень, 2 - весна)

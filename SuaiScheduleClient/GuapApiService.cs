@@ -1,4 +1,6 @@
+using System.Globalization;
 using Application.DTO;
+using Application.Models;
 using StackExchange.Redis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -69,6 +71,7 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
     // TODO: Сразу парсим эти данные при получении и храним уже в своём формате в redis, с разделением на группы
     // TODO: Сохраняем изначальную нормализацию, т.к. данных много.
     // TODO: В новой структуре убрать дни недели и рассчитывать их по UNIX времени
+    // TODO: Сделать метод для сборки CalendarEvents List
     public async Task DownloadAllStudiesToRedisAsync()
     {
         var json = await GetDataAsync<string>(Endpoints.StudyEvents);
@@ -83,6 +86,7 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
         var db = redisCm.GetDatabase();
         await db.StringSetAsync("sem-events", jsonText);
     }
+    
     public async Task<string> RedisGetAllStudiesAsync()
     {
         using var scope = _scopeFactory.CreateScope();
@@ -99,10 +103,6 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
         var schedules = JsonConvert.DeserializeObject<Dictionary<int, WeeklySchedule>>(doc["groups"].ToString());
         return schedules ?? throw new NullReferenceException();
     }
-    
-    
-    
-
     
     public async Task<Version> GetVersionAsync()
     {

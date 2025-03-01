@@ -4,14 +4,11 @@ namespace Application.DTO;
 
 public class Room
 {
-    [JsonProperty("ItemId")] 
-    public int ItemId;
+    [JsonProperty("ItemId")] public int ItemId;
 
-    [JsonProperty("Name")] 
-    public string Name;
+    [JsonProperty("Name")] public string Name;
 
-    [JsonProperty("BuildingId")] 
-    public int BuildingId;
+    [JsonProperty("BuildingId")] public int BuildingId;
 }
 
 // /get-sem-rooms - получить список аудиторий

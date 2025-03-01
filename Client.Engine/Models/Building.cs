@@ -4,10 +4,11 @@ namespace Application.DTO;
 
 public class Building
 {
-    [JsonProperty("Name")] private string Name;
-    [JsonProperty("Title")] private string Title;
-    [JsonProperty("ItemId")] private int ItemId;
+    [JsonProperty("Name")] public string Name;
+    [JsonProperty("Title")] public string Title;
+    [JsonProperty("ItemId")] public int ItemId;
 }
+
 
 // /get-sem-builds?ids=<id1_>,<id2_>,<id3_>... - получить список корпусов
 // Аргумент ids - список ИД через запятую

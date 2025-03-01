@@ -8,7 +8,6 @@ public class Group()
     [JsonProperty("ItemId")] public int ItemId;
 }
 
-
 // Пример:
 //
 // [
