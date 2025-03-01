@@ -2,118 +2,41 @@ using System.Text;
 
 namespace Application.Static;
 
-// Предназначение класса: Возвращать эндпоинты расписания гуап
-public static class Endpoints
+// Предназначение класса: Возвращать эндпоинты расписания ГУАП
+public class Endpoints
 {
-    // TODO: Добавить автоматическую проверку перед
-    // запуском проекта на наличие этих данных.
-    // (Сделать get запросы)
-    public const string GetGuapRaspApiUrl = "https://test-rasp.guap.ru:8080";
-    
-    public static string Version
+    private readonly string DirectoryName = "Endpoints";
+    private readonly IConfiguration _config;
+    public Endpoints(IConfiguration config)
     {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-version");
-            return stringBuilder.ToString();
-        }
+        _config = config;
     }
 
-    public static string Rooms
+    private string GetPath(string? endpoint)
     {
-        get
+        var route = _config[$"{DirectoryName}:{endpoint}"];
+        if (string.IsNullOrEmpty(endpoint))
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-rooms");
-            return stringBuilder.ToString();
+            throw new Exception($"Failed to retrieve the API URL from the configuration. Make sure the '{DirectoryName}:{endpoint}' key is present in appsettings.json.");
         }
-    }
-    
-    public static string Buildings
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-builds");
-            return stringBuilder.ToString();
-        }
+        return GetBaseApiUrl() + route;
     }
 
-    public static string Departments
-    {
-        get
+    private string GetBaseApiUrl()
+    { 
+        var url = _config[$"{DirectoryName}:Url"];
+        if (string.IsNullOrEmpty(url))
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-depts");
-            return stringBuilder.ToString();
+            throw new Exception($"Failed to retrieve the API URL from the configuration. Make sure the '{DirectoryName}:Url' key is present in appsettings.json.");
         }
+        return url;
     }
-
-    public static string Teachers
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-teachers");
-            return stringBuilder.ToString();
-        }
-    }
-
-    public static string Groups
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-groups");
-            return stringBuilder.ToString();
-        }
-    }
-
-    public static string StudyEvents
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-sem-events");
-            return stringBuilder.ToString();
-        }
-    }
-
-    public static string ExamEvents
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(GetGuapRaspApiUrl);
-            stringBuilder.Append("/get-session-events");
-            return stringBuilder.ToString();
-        }
-    }
-
-    public static string GroupExamEvents(int groupId)
-    {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.Append(GetGuapRaspApiUrl);
-        stringBuilder.Append($"/get-session-group-events?id={groupId.ToString()}");
-        return stringBuilder.ToString();
-    }
-
-    // term - семестр (1 или 2)
-    public static string GroupStudyEvents(int term, int groupId, long? dateStart = null, long? dateEnd = null)
-    {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.Append(GetGuapRaspApiUrl);
-        stringBuilder.Append($"/get-sem-group-events?term={term.ToString()}&id={groupId.ToString()}");
-        if (dateStart.HasValue) stringBuilder.Append($"&startdate={dateStart.ToString()}");
-        if (dateEnd.HasValue) stringBuilder.Append($"&enddate={dateStart.ToString()}");
-        return stringBuilder.ToString();
-    }
+    public string Version => GetPath(_config[$"{DirectoryName}:Version"]);
+    public string Rooms => GetPath(_config[$"{DirectoryName}:Rooms"]);
+    public string Buildings => GetPath(_config[$"{DirectoryName}:Buildings"]);
+    public string Departments => GetPath(_config[$"{DirectoryName}:Departments"]);
+    public string Teachers => GetPath(_config[$"{DirectoryName}:Teachers"]);
+    public string Groups => GetPath(_config[$"{DirectoryName}:Groups"]);
+    public string StudyEvents => GetPath(_config[$"{DirectoryName}:StudyEvents"]);
+    public string ExamEvents => GetPath(_config[$"{DirectoryName}:ExamEvents"]);
 }

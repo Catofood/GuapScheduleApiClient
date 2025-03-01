@@ -7,9 +7,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
-builder.Services.AddSingleton<GuapApiService>();
+builder.Services.AddScoped<GuapApiService>();
+builder.Services.AddScoped<Endpoints>();
 builder.Services.AddScoped<IConnectionMultiplexer>(sp =>
-    ConnectionMultiplexer.Connect(Redis.ConnectionString));
+    ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
 
 
 var app = builder.Build();

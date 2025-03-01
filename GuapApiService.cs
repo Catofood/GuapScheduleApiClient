@@ -10,10 +10,12 @@ namespace Application.Static;
 
 using Version = DTO_Version;
 
-public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory)
+public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory, Endpoints endpoints)
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
     private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
+    private readonly Endpoints _endpoints = endpoints;
+
     private async Task<T> GetDataAsync<T>(string fullEndpointPath)
     {var response = await _httpClient.GetAsync(fullEndpointPath);
         if (!response.IsSuccessStatusCode)
@@ -23,47 +25,47 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var data = JsonConvert.DeserializeObject<T>(jsonResponse);
-
         return data;
     }
+
     public async Task<string> GetTeachers()
     {
-        return await GetDataAsync<string>(Endpoints.Teachers);
+        return await GetDataAsync<string>(_endpoints.Teachers);
     }
 
     public async Task<string> GetExamEvents()
     {
-        return await GetDataAsync<string>(Endpoints.ExamEvents);
+        return await GetDataAsync<string>(_endpoints.ExamEvents);
     }
     
     public async Task<string> GetStudyEvents()
     {
-        return await GetDataAsync<string>(Endpoints.StudyEvents);
+        return await GetDataAsync<string>(_endpoints.StudyEvents);
     }
 
     public async Task<string> GetGroups()
     {
-        return await GetDataAsync<string>(Endpoints.Groups);
+        return await GetDataAsync<string>(_endpoints.Groups);
     }
 
     public async Task<string> GetDepartments()
     {
-        return await GetDataAsync<string>(Endpoints.Departments);
+        return await GetDataAsync<string>(_endpoints.Departments);
     }
 
     public async Task<string> GetBuildings()
     {
-        return await GetDataAsync<string>(Endpoints.Buildings);
+        return await GetDataAsync<string>(_endpoints.Buildings);
     }
     
     public async Task<string> GetRooms()
     {
-        return await GetDataAsync<string>(Endpoints.Rooms);
+        return await GetDataAsync<string>(_endpoints.Rooms);
     }
     
     public async Task<string> GetVersion()
     {
-        return await GetDataAsync<string>(Endpoints.Version);
+        return await GetDataAsync<string>(_endpoints.Version);
     }
     
     // TODO: Сразу парсим эти данные при получении и храним уже в своём формате в redis, с разделением на группы
@@ -71,7 +73,7 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
     // TODO: В новой структуре убрать дни недели и рассчитывать их по UNIX времени
     public async Task DownloadAllStudiesToRedisAsync()
     {
-        var json = await GetDataAsync<string>(Endpoints.StudyEvents);
+        var json = await GetDataAsync<string>(_endpoints.StudyEvents);
         await RedisSetAllStudiesAsync(json);
     }
 
@@ -98,14 +100,5 @@ public class GuapApiService(IHttpClientFactory httpClientFactory, IServiceScopeF
         var doc = JObject.Parse(await RedisGetAllStudiesAsync());
         var schedules = JsonConvert.DeserializeObject<Dictionary<int, WeeklySchedule>>(doc["groups"].ToString());
         return schedules ?? throw new NullReferenceException();
-    }
-    
-    
-    
-
-    
-    public async Task<Version> GetVersionAsync()
-    {
-        return await GetDataAsync<Version>(Endpoints.Version);
     }
 }
