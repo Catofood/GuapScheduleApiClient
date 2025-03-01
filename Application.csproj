@@ -15,4 +15,17 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Cache.Contracts\obj\Cache.Contracts.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Cache.Contracts\obj\Chache.Contracts.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Cache.Contracts\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Cache.Contracts\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Cache.Entities\obj\Cache.Entities.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Cache.Entities\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Cache.Entities\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Client.Contracts\obj\Client.Contracts.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Client.Contracts\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Client.Contracts\obj\project.packagespec.json" />
+    </ItemGroup>
+
 </Project>
