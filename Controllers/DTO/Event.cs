@@ -1,16 +1,23 @@
 using Newtonsoft.Json;
 
-namespace Application.DTO;
+namespace Application.Controllers.DTO;
 
 public class Event
 {
-    [JsonProperty("eventName")] public string EventName;
-    [JsonProperty("eventDateStart")] public long? EventDateStart;
-    [JsonProperty("eventDateEnd")] public long? EventDateEnd;
-    [JsonProperty("roomIds")] public List<int> RoomIds;
-    [JsonProperty("teacherIds")] public List<int> TeacherIds;
-    [JsonProperty("departmentId")] public int DepartmentId;
-    [JsonProperty("eventType")] public string EventType;
+    [JsonProperty("eventName")] 
+    public string EventName;
+    [JsonProperty("eventDateStart")] 
+    public long? EventDateStart;
+    [JsonProperty("eventDateEnd")] 
+    public long? EventDateEnd;
+    [JsonProperty("roomIds")] 
+    public List<long> RoomIds;
+    [JsonProperty("teacherIds")] 
+    public List<long> TeacherIds;
+    [JsonProperty("departmentId")] 
+    public long DepartmentId;
+    [JsonProperty("eventType")] 
+    public string EventType;
 }
 
 

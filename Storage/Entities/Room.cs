@@ -1,8 +1,7 @@
-namespace Application.Models;
+namespace Application.Storage.Entities;
 
 public class Room
 {
-    public int ItemId;
     public string Name;
     public int BuildingId;
 }

@@ -1,10 +1,15 @@
-namespace Application.Models;
+using Newtonsoft.Json;
+
+namespace Application.Controllers.DTO;
 
 public class Group()
 {
-    public string Name; 
-    public int ItemId;
+    [JsonProperty("Name")] 
+    public string Name;
+    [JsonProperty("ItemId")] 
+    public long ItemId;
 }
+
 
 // Пример:
 //

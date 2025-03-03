@@ -1,4 +1,4 @@
-namespace Application.Models;
+namespace Application.Storage.Entities;
 
 public class Building
 {

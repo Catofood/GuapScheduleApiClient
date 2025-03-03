@@ -1,22 +1,10 @@
-using Newtonsoft.Json;
-
-namespace Application.DTO;
+namespace Application.Storage.Entities;
 
 public class Teacher
 {
-    [JsonProperty("ItemId")] 
-    public int ItemId;
-
-    [JsonProperty("Name")] 
     public string Name;
-
-    [JsonProperty("Post")] 
     public string Post;
-
-    [JsonProperty("Degree")] 
     public string Degree;
-
-    [JsonProperty("AcademicTitle")] 
     public string AcademicTitle;
 }
 

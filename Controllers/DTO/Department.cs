@@ -1,11 +1,11 @@
 using Newtonsoft.Json;
 
-namespace Application.DTO;
+namespace Application.Controllers.DTO;
 
 public class Department
 {
     [JsonProperty("ItemId")] 
-    public int ItemId;
+    public long ItemId;
 
     [JsonProperty("Name")] 
     public string Name;

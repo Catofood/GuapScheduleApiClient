@@ -1,13 +1,28 @@
-namespace Application.Models;
+using Newtonsoft.Json;
+
+namespace Application.Controllers.DTO;
 
 public class Version
 {
+    [JsonProperty("versionID")] 
     public int VersionId;
+
+    [JsonProperty("version_main")] 
     public int VersionMain;
+
+    [JsonProperty("version_session")] 
     public int VersionSession;
+
+    [JsonProperty("version_zaoch")] 
     public int VersionZaoch;
+
+    [JsonProperty("version_spo")] 
     public int VersionSpo;
+
+    [JsonProperty("datetime")] 
     public long DateTime;
+
+    [JsonProperty("term")] 
     public int Term;
 }
 

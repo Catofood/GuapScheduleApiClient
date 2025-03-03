@@ -1,17 +1,17 @@
 using Newtonsoft.Json;
 
-namespace Application.DTO;
+namespace Application.Controllers.DTO;
 
 public class Room
 {
     [JsonProperty("ItemId")] 
-    public int ItemId;
+    public long ItemId;
 
     [JsonProperty("Name")] 
     public string Name;
 
     [JsonProperty("BuildingId")] 
-    public int BuildingId;
+    public long BuildingId;
 }
 
 // /get-sem-rooms - получить список аудиторий

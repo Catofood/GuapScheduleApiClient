@@ -1,13 +1,9 @@
-using Newtonsoft.Json;
-
-namespace Application.DTO;
+namespace Application.Storage.Entities;
 
 public class Group()
 {
-    [JsonProperty("Name")] public string Name;
-    [JsonProperty("ItemId")] public int ItemId;
+    public string Name;
 }
-
 
 // Пример:
 //

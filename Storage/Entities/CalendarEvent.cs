@@ -1,5 +1,7 @@
+namespace Application.Storage.Entities;
+
 public class CalendarEvent
-{ 
+{
     // events - groups
     public string Group;
 
@@ -32,7 +34,7 @@ public class CalendarEvent
 
     // events - teachers
     public string TeacherAcademicTitle;
-    
+
     // events - departments
     public string Department;
 }

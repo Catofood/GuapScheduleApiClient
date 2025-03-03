@@ -1,11 +1,22 @@
-namespace Application.Models;
+using Newtonsoft.Json;
+
+namespace Application.Controllers.DTO;
 
 public class Teacher
 {
-    public int ItemId;
+    [JsonProperty("ItemId")] 
+    public long ItemId;
+
+    [JsonProperty("Name")] 
     public string Name;
+
+    [JsonProperty("Post")] 
     public string Post;
+
+    [JsonProperty("Degree")] 
     public string Degree;
+
+    [JsonProperty("AcademicTitle")] 
     public string AcademicTitle;
 }
 

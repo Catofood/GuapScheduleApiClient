@@ -1,12 +1,15 @@
 using Newtonsoft.Json;
 
-namespace Application.DTO;
+namespace Application.Controllers.DTO;
 
 public class Building
 {
-    [JsonProperty("Name")] private string Name;
-    [JsonProperty("Title")] private string Title;
-    [JsonProperty("ItemId")] private int ItemId;
+    [JsonProperty("Name")] 
+    public string Name;
+    [JsonProperty("Title")] 
+    public string Title;
+    [JsonProperty("ItemId")] 
+    public long ItemId;
 }
 
 // /get-sem-builds?ids=<id1_>,<id2_>,<id3_>... - получить список корпусов
